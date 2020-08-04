@@ -1,5 +1,5 @@
 # VesReader
-Useful script to work with lot of VES.ipd or .dat files (for ММПГ-1 magnetometer only)
+Useful script to work with lot of VES.ipd or .dat files
 
 1. Для пользования скриптом VesReader на компьютере должен быть установлен язык Python версии не ниже 3.8
 
