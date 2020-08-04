@@ -24,7 +24,8 @@ class VesReader:
             
             # sort
             self.content = sorted(self.content, key=lambda x: (max(x['pka'], x['pkb']), max(x['pkm'], x['pkn'])))
-    
+
+    # calculate setup coefficient (standard 4-electrodes)
     def calc_K(self):
         for _dict in self.content:
             am = _dict['pka'] - _dict['pkm']
