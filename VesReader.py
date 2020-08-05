@@ -63,23 +63,13 @@ def main():
     files = os.listdir(folder)
     files = [file for file in files if file.endswith('.ipd') or file.endswith('.dat')]
 
-    
-    """while True:
-        name = input('Файл исходников: ')
-        if name == 'exit':
-            break
-        ves = VesReader()
-        ves.read(f'{folder}\\{name}')
-        ves.calc_K()
-        ves.write_to_file(f'{folder}\\{name[:-4]}_output.txt')
-        print(f'Файл {folder}\\{name[:-4]}_output.txt записан')"""
-
     for file in files:
         ves = VesReader()
         ves.read(f'{folder}\\{file}')
         ves.calc_K()
         ves.write_to_file(f'{folder}\\{file[:-4]}_output.txt')
     print('Все файлы в папке обработаны')
+
 
 if __name__ == '__main__':
     main()
