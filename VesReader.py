@@ -1,8 +1,10 @@
 ﻿from math import pi
+import os
+
 
 # полное имя папки, в которой лежат исходники .ipd или .dat
 # кроме этой строки больше ничего не меняйте
-folder = r'D:\2020\Малмыж\Исходники\Объекты второй очереди'
+folder = r'D:\2020\Малмыж\Исходники\Главный корпус\Главный корпус рядовые (IPD)'
 
 
 class VesReader:
@@ -58,8 +60,11 @@ class VesReader:
 
 
 def main():
-    print('Введите exit чтобы выйти')
-    while True:
+    files = os.listdir(folder)
+    files = [file for file in files if file.endswith('.ipd') or file.endswith('.dat')]
+
+    
+    """while True:
         name = input('Файл исходников: ')
         if name == 'exit':
             break
@@ -67,8 +72,14 @@ def main():
         ves.read(f'{folder}\\{name}')
         ves.calc_K()
         ves.write_to_file(f'{folder}\\{name[:-4]}_output.txt')
-        print(f'Файл {folder}\\{name[:-4]}_output.txt записан')
+        print(f'Файл {folder}\\{name[:-4]}_output.txt записан')"""
 
+    for file in files:
+        ves = VesReader()
+        ves.read(f'{folder}\\{file}')
+        ves.calc_K()
+        ves.write_to_file(f'{folder}\\{file[:-4]}_output.txt')
+    print('Все файлы в папке обработаны')
 
 if __name__ == '__main__':
     main()
