@@ -17,7 +17,18 @@ class VesReader:
         with open(name) as file:
             self.read_list = file.readlines()
             self.read_list = [row.strip().split() for row in self.read_list][4:]
-            self.content = [{'pka': i[2], 'pkb': i[4], 'pkm': i[6], 'pkn': i[7], 'ares': i[9], 'chr': i[10], 'voltage': i[8]} for i in self.read_list]
+            self.content = [
+                {
+                    'pka': i[2],
+                    'pkb': i[4],
+                    'pkm': i[6],
+                    'pkn': i[7],
+                    'ares': i[9],
+                    'chr': i[10],
+                    'voltage': i[8]
+                }
+                for i in self.read_list
+            ]
 
             # str -> float
             for _dict in self.content:
