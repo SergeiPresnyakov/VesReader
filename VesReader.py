@@ -37,21 +37,25 @@ class VesReader:
             K = round((2 * pi) / abs(1/am - 1/bm - 1/an + 1/bn), 2)
             _dict['K'] = K
 
-    def write_to_file(self, name):
+    def write_to_file(self, name, ves_no):
         # prepare and format
         for _dict in self.content:
             for key in _dict:
                 _dict[key] = str(_dict[key])
+
+                # PK number must be integer 
                 if key in {'pka', 'pkb', 'pkm', 'pkn'} and _dict[key].endswith('.0'):
                     _dict[key] = _dict[key][:-2]
 
         # write to file
-        with open(name, 'w') as output:
-            output.write('AB/2, м\tMN/2, м\tK\tUпр, мВ\tI, мА\tRes, Ом.м\tВП, %\tVoltage\n')
+        with open(name, 'a') as output:
+            output.write(ves_no + '\n')
+            output.write('AB/2, м;MN/2, м;K;Uпр, мВ;I, мА;Res, Ом.м;ВП, %;Voltage\n')
             for row in self.content:
                 a = max(row['pka'], row['pkb'])
                 b = max(row['pkm'], row['pkn'])
-                output.write(f"{a}\t{b}\t{row['K']}\t\t\t{row['ares']}\t{row['chr']}\t{row['voltage']}\n")
+                output.write(f"{a};{b};{row['K']};;;{row['ares']};{row['chr']};{row['voltage']}\n")
+            output.write('\n\n')
 
     def __str__(self):
         for el in self.content:
@@ -67,7 +71,7 @@ def main():
         ves = VesReader()
         ves.read(f'{folder}\\{file}')
         ves.calc_K()
-        ves.write_to_file(f'{folder}\\{file[:-4]}_output.txt')
+        ves.write_to_file(f'{folder}\\Databaze.csv', file)
     print('Все файлы в папке обработаны')
 
 
